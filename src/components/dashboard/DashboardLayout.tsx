@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   Users, 
@@ -19,9 +20,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const menuItems = [
-    { icon: LayoutDashboard, label: 'Dashboard', href: '#' },
-    { icon: Users, label: 'Students', href: '#' },
-    { icon: GraduationCap, label: 'CBC Assessment', href: '#' },
+    { icon: LayoutDashboard, label: 'Principal', href: '/principal' },
+    { icon: Users, label: 'Teacher', href: '/teacher' },
+    { icon: GraduationCap, label: 'Class Teacher', href: '/classteacher' },
     { icon: Calendar, label: 'Timetable', href: '#' },
     { icon: Settings, label: 'Settings', href: '#' },
   ];
@@ -36,14 +37,14 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       
       <nav className="flex-1 px-4">
         {menuItems.map((item) => (
-          <a
+          <Link
             key={item.label}
-            href={item.href}
+            to={item.href}
             className="flex items-center gap-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-purple-50 hover:text-purple-600 transition-colors"
           >
             <item.icon size={20} />
             <span>{item.label}</span>
-          </a>
+          </Link>
         ))}
       </nav>
     </div>
