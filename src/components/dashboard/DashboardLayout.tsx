@@ -8,6 +8,8 @@ import {
   Calendar,
   Settings,
   Menu,
+  Bot,
+  UserPlus,
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import {
@@ -23,6 +25,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     { icon: LayoutDashboard, label: 'Principal', href: '/principal' },
     { icon: Users, label: 'Teacher', href: '/teacher' },
     { icon: GraduationCap, label: 'Class Teacher', href: '/classteacher' },
+    { icon: UserPlus, label: 'Student Registration', href: '/student-registration' },
+    { icon: Bot, label: 'AI Features', href: '/ai-features' },
     { icon: Calendar, label: 'Timetable', href: '#' },
     { icon: Settings, label: 'Settings', href: '#' },
   ];
