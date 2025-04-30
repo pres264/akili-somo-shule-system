@@ -11,6 +11,7 @@ import Teacher from "./pages/Teacher";
 import ClassTeacher from "./pages/ClassTeacher";
 import StudentRegistration from "./pages/StudentRegistration";
 import AIFeatures from "./pages/AIFeatures";
+import Communication from "./pages/Communication";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/classteacher" element={<ClassTeacher />} />
           <Route path="/student-registration" element={<StudentRegistration />} />
           <Route path="/ai-features" element={<AIFeatures />} />
+          <Route path="/communication" element={<Communication />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
