@@ -1,7 +1,9 @@
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
 import {
   Select,
   SelectContent,
@@ -13,6 +15,45 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const LoginPage = () => {
   const [role, setRole] = useState('');
+  const [schoolId, setSchoolId] = useState('');
+  const [email, setEmail] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    // For now, simply validate that a role is selected
+    if (!role) {
+      toast({
+        title: "Please select a role",
+        description: "You need to select a role to continue",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Redirect based on role
+    switch(role) {
+      case "principal":
+        navigate("/principal");
+        break;
+      case "teacher":
+        navigate("/teacher");
+        break;
+      case "class-teacher":
+        navigate("/classteacher");
+        break;
+      case "parent":
+        // For now, redirect parents to a dashboard
+        navigate("/principal"); // Can be updated later with a parent dashboard
+        break;
+      default:
+        navigate("/principal");
+    }
+    
+    toast({
+      title: "Welcome to Akili Somo",
+      description: `You are logged in as a ${role}`,
+    });
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-blue-50">
@@ -41,18 +82,33 @@ const LoginPage = () => {
           </div>
           
           <div className="space-y-2">
-            <Input type="text" placeholder="School ID" className="w-full" />
+            <Input 
+              type="text" 
+              placeholder="School ID" 
+              className="w-full" 
+              value={schoolId}
+              onChange={(e) => setSchoolId(e.target.value)}
+            />
           </div>
           
           <div className="space-y-2">
-            <Input type="email" placeholder="Email Address" className="w-full" />
+            <Input 
+              type="email" 
+              placeholder="Email Address" 
+              className="w-full" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           
           <div className="space-y-2">
             <Input type="password" placeholder="Password" className="w-full" />
           </div>
           
-          <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white">
+          <Button 
+            className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
+            onClick={handleLogin}
+          >
             Sign In
           </Button>
           
