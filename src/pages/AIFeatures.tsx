@@ -1,8 +1,11 @@
 
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { AIAssistant } from "@/components/ai/AIAssistant";
+import { AIAgentManager } from "@/components/ai/AIAgentManager";
+import { AIAgentSetup } from "@/components/ai/AIAgentSetup";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bot, Brain, Database, Layers } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Bot, Brain, Database, Layers, Zap, Settings } from "lucide-react";
 
 const AIFeatures = () => {
   return (
@@ -10,8 +13,49 @@ const AIFeatures = () => {
       <div className="space-y-6">
         <h1 className="text-3xl font-bold tracking-tight">AI-Powered School Management</h1>
         
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          <div className="col-span-full xl:col-span-2">
+        <Tabs defaultValue="agents" className="w-full">
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="agents">AI Agents</TabsTrigger>
+            <TabsTrigger value="setup">Agent Setup</TabsTrigger>
+            <TabsTrigger value="assistant">AI Assistant</TabsTrigger>
+            <TabsTrigger value="features">AI Features</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="agents" className="mt-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Bot className="h-5 w-5" />
+                  AI Agent Management
+                </CardTitle>
+                <CardDescription>
+                  Manage and monitor your automated AI agents for school management tasks
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <AIAgentManager />
+              </CardContent>
+            </Card>
+          </TabsContent>
+          
+          <TabsContent value="setup" className="mt-6">
+            <AIAgentSetup />
+          </TabsContent>
+          
+          <TabsContent value="assistant" className="mt-6">
+            <div className="grid gap-6 md:grid-cols-2">
+              <div>
+                <h2 className="text-2xl font-bold mb-4">AI Assistant</h2>
+                <p className="text-muted-foreground mb-6">
+                  Chat with our AI assistant to get help with school management tasks, 
+                  ask questions, and get recommendations.
+                </p>
+              </div>
+              <AIAssistant />
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="features" className="mt-6">
             <div className="grid gap-4 md:grid-cols-2">
               <Card>
                 <CardHeader>
@@ -44,14 +88,14 @@ const AIFeatures = () => {
               <Card>
                 <CardHeader>
                   <div className="flex items-center gap-2">
-                    <Bot className="h-5 w-5 text-green-600" />
-                    <CardTitle>Parent Communication</CardTitle>
+                    <Zap className="h-5 w-5 text-green-600" />
+                    <CardTitle>Automated Communications</CardTitle>
                   </div>
-                  <CardDescription>AI-powered responses to common queries</CardDescription>
+                  <CardDescription>AI agents handle routine communications</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p>Our chatbot can handle routine parent inquiries about school policies,
-                  schedules, and student information, freeing up staff time.</p>
+                  <p>Set up AI agents to automatically send attendance updates, fee reminders,
+                  and performance reports to parents via SMS and USSD.</p>
                 </CardContent>
               </Card>
               
@@ -69,12 +113,8 @@ const AIFeatures = () => {
                 </CardContent>
               </Card>
             </div>
-          </div>
-          
-          <div className="col-span-full xl:col-span-1">
-            <AIAssistant />
-          </div>
-        </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </DashboardLayout>
   );
